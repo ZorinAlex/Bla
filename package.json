@@ -11,9 +11,9 @@
     "nlp",
     "automation"
   ],
-  "main": "messenger.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node messenger.js",
+    "start": "node index.js",
     "lint": "jshint --exclude node_modules .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
