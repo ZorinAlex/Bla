@@ -85,7 +85,7 @@ const firstEntityValue = (entities, entity) => {
 function sendTypingOn(recipientId) {
   console.log("Turning typing indicator on");
 
-  var messageData = {
+  let messageData = {
     recipient: {
       id: recipientId
     },
@@ -118,6 +118,20 @@ function callSendAPI(messageData) {
       console.error(response.error);
     }
   });
+}
+
+function sendTextMessage(recipientId, messageText) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: messageText,
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+
+  callSendAPI(messageData);
 }
 
 const fbMessage = (id, text) => {
@@ -192,7 +206,7 @@ const actions = {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
-      return fbMessage(recipientId, text)
+      return sendTextMessage(recipientId, text)
       .then(() => null)
       .catch((err) => {
         console.error(
