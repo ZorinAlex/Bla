@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 // Messenger API integration example
 // We assume you have:
 // * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
@@ -19,6 +21,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const request = require('request');
 const fconfig = require('../fconfog');
+const weather = require('weather-js');
 
 let Wit = null;
 let log = null;
@@ -49,6 +52,18 @@ crypto.randomBytes(8, (err, buff) => {
   FB_VERIFY_TOKEN = buff.toString('hex');
   console.log(`/webhook will accept the Verify Token "${FB_VERIFY_TOKEN}"`);
 });
+
+function getWeather(city){
+  weather.find({search: city, degreeType: 'C'}, function(err, result) {
+    if(err){
+      console.log(err);
+      return null;
+    }
+
+    console.log(JSON.stringify(result, null, 2));
+    return result;
+  });
+}
 
 // ----------------------------------------------------------------------------
 // Messenger API specific code
@@ -177,7 +192,7 @@ const actions = {
         {
           message+=location;
         }else{
-          message+='your location';
+          message+='your /n location';
         }
         if(date)
         {
