@@ -157,7 +157,7 @@ const actions = {
       var date = firstEntityValue(entities, "datetime");
       if (location || date) {
         context.forecast = 'in '+ location?location:'your location '+'at '+ date?date:'now'; // we should call a weather API here
-        context.forecast = 'padlo davay';
+        //context.forecast = 'padlo davay';
         //delete context.missingLocation;
       } else {
         //context.missingLocation = true;
