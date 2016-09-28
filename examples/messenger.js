@@ -142,7 +142,7 @@ const actions = {
     return new Promise(function(resolve, reject) {
       var location = firstEntityValue(entities, 'location')
       if (location) {
-        context.forecast = 'You are requested' + location; // we should call a weather API here
+        context.forecast = location; // we should call a weather API here
         delete context.missingLocation;
       } else {
         context.missingLocation = true;
