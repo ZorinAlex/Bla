@@ -156,7 +156,7 @@ const actions = {
       var location = firstEntityValue(entities, 'location')
       var date = secondEntityValue(entities, 'datetime')
       if (location) {
-        context.forecast = +"in "+ location + "at" date; // we should call a weather API here
+        context.forecast = +"in "+ location + "at" + date?date:" toto"; // we should call a weather API here
         if(date) {
           context.forecast+= date;
         }
