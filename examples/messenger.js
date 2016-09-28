@@ -83,13 +83,13 @@ const secondEntityValue = (entities, entity) => {
 const fbMessage = (id, text) => {
   const body = JSON.stringify({
     recipient: { id },
-    message: { text },
+    message: { text }
   });
   const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
   return fetch('https://graph.facebook.com/me/messages?' + qs, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body,
+    body
   })
   .then(rsp => rsp.json())
   .then(json => {
@@ -125,6 +125,22 @@ const findOrCreateSession = (fbid) => {
   return sessionId;
 };
 
+function formatDate(date) {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear(),
+
+      hour = '' + d.getHours(),
+      min = '' + d.getMinutes();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+  if (min.length < 2) min = '0' + min;
+  if (hour.length < 2) hour = '0' + hour;
+
+  return [year, month, day].join('-')+' at ' +[hour,min].join('.');
+}
 // Our bot actions
 const actions = {
   send({sessionId}, {text}) {
@@ -165,9 +181,11 @@ const actions = {
         }
         if(date)
         {
-          message+=' at '+date;
+          let d = new Date(date);
+          message+=' on '+formatDate(d);
         }else{
-          message+=' today ';
+          let d = new Date();
+          message+=' on '+formatDate(d);
         }
         
         context.forecast = message;
@@ -179,7 +197,7 @@ const actions = {
       }
       return resolve(context);
     });
-  },
+  }
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
 };
