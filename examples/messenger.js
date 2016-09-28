@@ -153,18 +153,20 @@ const actions = {
   },
   getForecast({context, entities}) {
     return new Promise(function(resolve, reject) {
-      var location = firstEntityValue(entities, 'location')
-      var date = firstEntityValue(entities, 'datetime')
+      var location = firstEntityValue(entities, "location");
+      var date = firstEntityValue(entities, "datetime");
       if (location || date) {
         context.forecast = 'in '+ location?location:'your location '+'at '+ date?date:'now'; // we should call a weather API here
-        delete context.missingLocation;
+        context.forecast = 'padlo davay';
+        //delete context.missingLocation;
       } else {
-        context.missingLocation = true;
-        delete context.forecast;
+        //context.missingLocation = true;
+        //delete context.forecast;
+        context.forecast = 'I cant understand You, sorry - try hard)';
       }
       return resolve(context);
     });
-  }
+  },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
 };
