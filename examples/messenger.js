@@ -55,6 +55,17 @@ crypto.randomBytes(8, (err, buff) => {
 
 // See the Send API reference
 // https://developers.facebook.com/docs/messenger-platform/send-api-reference
+const firstEntityValue = (entities, entity) => {
+  const val = entities && entities[entity] &&
+    Array.isArray(entities[entity]) &&
+    entities[entity].length > 0 &&
+    entities[entity][0].value
+  ;
+  if (!val) {
+    return null;
+  }
+  return typeof val === 'object' ? val.value : val;
+};
 
 const fbMessage = (id, text) => {
   const body = JSON.stringify({
