@@ -161,15 +161,15 @@ const actions = {
         {
           message+=location;
         }else{
-          message+='your location ';
+          message+='your location';
         }
         if(date)
         {
-          message+=date;
+          message+=' at '+date;
         }else{
-          message+='today ';
+          message+=' today ';
         }
-        //context.forecast = 'in '+ location?location:'your location '+'at '+ date?date:'now'; // we should call a weather API here
+        
         context.forecast = message;
         //delete context.missingLocation;
       } else {
