@@ -85,9 +85,9 @@ const firstEntityValue = (entities, entity) => {
 function sendTypingOn(recipientId) {
   console.log("Turning typing indicator on");
 
-  var messageData = {
+  var messageData = JSON.stringify({
     sender_action: "typing_on"
-  };
+  });
 
   fbMessage(recipientId,messageData);
 }
