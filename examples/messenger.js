@@ -82,6 +82,15 @@ const firstEntityValue = (entities, entity) => {
   return typeof val === 'object' ? val.value : val;
 };
 
+function sendTypingOn(recipientId) {
+  console.log("Turning typing indicator on");
+
+  var messageData = {
+    sender_action: "typing_on"
+  };
+
+  fbMessage(recipientId,messageData);
+}
 
 const fbMessage = (id, text) => {
   const body = JSON.stringify({
@@ -151,6 +160,7 @@ const actions = {
     // Let's retrieve the Facebook user whose session belongs to
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
+      sendTypingOn(recipientId);
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
@@ -176,60 +186,20 @@ const actions = {
       var date = firstEntityValue(entities, "datetime");
       if (location || date) {
         var message = 'in ';
-        //if(location)
-        //{
-        //  message+=location;
-        //}else{
-        //  message+='your location';
-        //}
-        //if(date)
-        //{
-        //  let d = new Date(date);
-        //  message+=' on '+formatDate(d);
-        //}else{
-        //  let d = new Date();
-        //  message+=' on '+formatDate(d);
-        //}
-        message = {
-          attachment: {
-            type: "template",
-                payload: {
-              template_type: "generic",
-                  elements: [{
-                title: "rift",
-                subtitle: "Next-generation virtual reality",
-                item_url: "https://www.oculus.com/en-us/rift/",
-                image_url: SERVER_URL + "/assets/rift.png",
-                buttons: [{
-                  type: "web_url",
-                  url: "https://www.oculus.com/en-us/rift/",
-                  title: "Open Web URL"
-                }, {
-                  type: "postback",
-                  title: "Call Postback",
-                  payload: "Payload for first bubble"
-                }]
-              }, {
-                title: "touch",
-                subtitle: "Your Hands, Now in VR",
-                item_url: "https://www.oculus.com/en-us/touch/",
-                image_url: SERVER_URL + "/assets/touch.png",
-                buttons: [{
-                  type: "web_url",
-                  url: "https://www.oculus.com/en-us/touch/",
-                  title: "Open Web URL"
-                }, {
-                  type: "postback",
-                  title: "Call Postback",
-                  payload: "Payload for second bubble"
-                }]
-              }]
-            }}};
-
-
-
-
-
+        if(location)
+        {
+          message+=location;
+        }else{
+          message+='your location';
+        }
+        if(date)
+        {
+          let d = new Date(date);
+          message+=' on '+formatDate(d);
+        }else{
+          let d = new Date();
+          message+=' on '+formatDate(d);
+        }
         context.forecast = message;
         //delete context.missingLocation;
       } else {
