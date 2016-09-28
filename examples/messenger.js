@@ -135,12 +135,6 @@ function sendTextMessage(recipientId, messageText) {
 }
 
 function sendGenericMessage(recipientId) {
-  weather = {
-    days:'Tusday',
-    weathers:'Cloudy',
-    img:"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",
-    temperatures:"Max: 15 Min: 10"
-  };
 
   var messageData = {
     recipient: {
@@ -152,12 +146,12 @@ function sendGenericMessage(recipientId) {
         payload: {
           template_type: "generic",
           elements: [{
-            title: weather.days,
-            subtitle: weather.weathers,
-            image_url: weather.img
+            title: 'Tusday',
+            subtitle:'Cloudy',
+            image_url:"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png"
           }, {
             title: "Temperature",
-            subtitle: weather.temperatures
+            subtitle: "Max: 15 Min: 10"
           }]
         }
       }
