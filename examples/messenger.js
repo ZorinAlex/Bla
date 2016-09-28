@@ -154,9 +154,9 @@ const actions = {
   getForecast({context, entities}) {
     return new Promise(function(resolve, reject) {
       var location = firstEntityValue(entities, 'location')
-      var date = secondEntityValue(entities, 'location')
+      var date = secondEntityValue(entities, 'datetime')
       if (location) {
-        context.forecast = location; // we should call a weather API here
+        context.forecast = +"in "+ location + "at" date; // we should call a weather API here
         if(date) {
           context.forecast+= date;
         }
