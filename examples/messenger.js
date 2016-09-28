@@ -67,6 +67,19 @@ const firstEntityValue = (entities, entity) => {
   return typeof val === 'object' ? val.value : val;
 };
 
+const secondEntityValue = (entities, entity) => {
+  const val = entities && entities[entity] &&
+    Array.isArray(entities[entity]) &&
+    entities[entity].length > 1 &&
+    entities[entity][1].value
+  ;
+  if (!val) {
+    return null;
+  }
+  return typeof val === 'object' ? val.value : val;
+};
+
+
 const fbMessage = (id, text) => {
   const body = JSON.stringify({
     recipient: { id },
@@ -141,8 +154,12 @@ const actions = {
   getForecast({context, entities}) {
     return new Promise(function(resolve, reject) {
       var location = firstEntityValue(entities, 'location')
+      var date = secondEntityValue(entities, 'location')
       if (location) {
         context.forecast = location; // we should call a weather API here
+        if(date) {
+          context.forecast+= date;
+        }
         delete context.missingLocation;
       } else {
         context.missingLocation = true;
