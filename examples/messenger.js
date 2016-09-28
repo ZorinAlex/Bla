@@ -153,13 +153,10 @@ const actions = {
   },
   getForecast({context, entities}) {
     return new Promise(function(resolve, reject) {
-      var location = firstEntityValue(entities, 'location')
-      var date = firstEntityValue(entities, 'datetime')
+      var location = firstEntityValue(entities, 'datetime')
+      //var date = firstEntityValue(entities, 'datetime')
       if (location) {
-        context.forecast = +"in "+ location + "at" + date?date:" toto"; // we should call a weather API here
-        if(date) {
-          context.forecast+= date;
-        }
+        context.forecast = +"in "+ location; // we should call a weather API here
         delete context.missingLocation;
       } else {
         context.missingLocation = true;
