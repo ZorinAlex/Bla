@@ -134,25 +134,37 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
-const fbMessage = (id, text) => {
-  const body = JSON.stringify({
-    recipient: { id },
-    message: { text }
-  });
-  const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
-  return fetch('https://graph.facebook.com/me/messages?' + qs, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body
-  })
-  .then(rsp => rsp.json())
-  .then(json => {
-    if (json.error && json.error.message) {
-      throw new Error(json.error.message);
+function sendGenericMessage(recipientId) {
+  weather = {
+    days:'Tusday',
+    weathers:'Cloudy',
+    img:"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",
+    temperatures:"Max: 15 Min: 10"
+  };
+
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [{
+            title: weather.days,
+            subtitle: weather.weathers,
+            image_url: weather.img
+          }, {
+            title: "Temperature",
+            subtitle: weather.temperatures
+          }]
+        }
+      }
     }
-    return json;
-  });
-};
+  };
+  callSendAPI(messageData);
+}
 
 // ----------------------------------------------------------------------------
 // Wit.ai bot specific code
@@ -203,6 +215,7 @@ const actions = {
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
       sendTypingOn(recipientId);
+      sendGenericMessage(recipientId);
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
