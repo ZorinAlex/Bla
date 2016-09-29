@@ -61,7 +61,7 @@ crypto.randomBytes(8, (err, buff) => {
 //     if(weatherForecast){
 //       sendGenericMessage(recipientId, weatherForecast[0].location.name,weatherForecast[0].current.skytext,weatherForecast[0].current.imageUrl,weatherForecast[0].current.temperature) 
 //     }
-function getWeather(city){
+function getWeather(city,recipientId){
   if(!city) city = 'Kiev';
   weather.find({search: city, degreeType: 'C'}, function(err, result) {
     if(err){
@@ -142,7 +142,7 @@ function sendTextMessage(recipientId, messageText) {
 
   callSendAPI(messageData);
   
-  getWeather(location);
+  getWeather(location,recipientId);
     
 }
 
