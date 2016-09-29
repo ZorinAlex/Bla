@@ -148,8 +148,8 @@ function sendGenericMessage(recipientId, day,weather,image,temperatres) {
           elements: [{
             title: day,
             subtitle:weather,
-            image_url:image,
-         // }, {
+            image_url:image
+          }, {
             title: "Temperature",
             subtitle: temperatres
           }]
@@ -208,8 +208,8 @@ const actions = {
     // Let's retrieve the Facebook user whose session belongs to
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
-      sendTypingOn(recipientId);
-      sendGenericMessage(recipientId,'Sunday','Cloudy',"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",'Max:15 Min:10');
+      sendTypingOn(recipientId); 
+      //sendGenericMessage(recipientId,'Sunday','Cloudy',"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",'Max:15 Min:10');
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
@@ -250,11 +250,10 @@ const actions = {
           message+=' on '+formatDate(d);
         }
         context.forecast = message;
-        //delete context.missingLocation;
+        sendGenericMessage(recipientId,'Sunday','Cloudy',"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",'Max:15 Min:10');
       } else {
-        //context.missingLocation = true;
-        //delete context.forecast;
-        context.forecast = 'I cant understand You, sorry - try hard)';
+       
+        context.forecast = 'but I cant understand You, sorry - try hard)';
       }
       return resolve(context);
     });
