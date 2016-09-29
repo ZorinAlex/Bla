@@ -277,8 +277,9 @@ const actions = {
         {
           
           let d = new Date(date);
-          console.log('DATE INITIAL: '+ date);
-          console.log('DATE: '+ d);
+          console.log("DATE INITIAL: %s",date);
+          console.log("DATE : %s",d);
+          
           message+=' on '+formatDate(d);
         }else{
           let d = new Date();
