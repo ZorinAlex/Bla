@@ -132,15 +132,15 @@ function sendTextMessage(recipientId, messageText) {
   };
 
   callSendAPI(messageData);
-  
+  var day;
   if(!location) location = 'Kiev';
-    var day = new Date(date.split(' ')[0]).getDay();
+  if(date) day = new Date(date.split(' ')[0]).getDay();
     var currentDay = new Date().getDay();
     var weatherForecast = getWeather(location);
     console.log('Recieved weather forecast weather.api');
-    if(weatherForecast){
+    //if(weatherForecast){
       sendGenericMessage(recipientId, weatherForecast[0].location.name,weatherForecast[0].current.skytext,weatherForecast[0].current.imageUrl,weatherForecast[0].current.temperature) 
-    }
+    //}
     
   
 }
