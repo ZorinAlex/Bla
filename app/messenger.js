@@ -19,7 +19,7 @@ const crypto = require('crypto');
 const express = require('express');
 const fetch = require('node-fetch');
 const request = require('request');
-const fconfig = require('./../fconfog');
+const fconfig = require('../fconfog');
 const weather = require('weather-js');
 
 let Wit = null;
@@ -71,15 +71,15 @@ function getWeather(city,recipientId){
     if(diff<4 && diff>-2){
       switch(diff){
         case -1:
-          return sendGenericMessage(recipientId, result[0].location.name + ' in '+ result[0].forecast[0].day,result[0].current.skytext,result[0].current.imageUrl,'Max: '+result[0].forecast[0].low +'C Min: '+ result[0].forecast[0].high+'C') ;
+          return sendGenericMessage(recipientId, result[0].location.name + ' in '+ result[0].forecast[0].day,result[0].current.skytext,result[0].current.imageUrl,'Min: '+result[0].forecast[0].low +'C Max: '+ result[0].forecast[0].high+'C') ;
         break;  
         case 0:
-          return sendGenericMessage(recipientId, result[0].location.name + ' in '+ result[0].current.day,result[0].current.skytext,result[0].current.imageUrl,'Current:'+result[0].current.temperature+'C Max: '+result[0].forecast[1].low +'C Min: '+ result[0].forecast[1].high+'C') ;
+          return sendGenericMessage(recipientId, result[0].location.name + ' in '+ result[0].current.day,result[0].current.skytext,result[0].current.imageUrl,'Current:'+result[0].current.temperature+'C Min: '+result[0].forecast[1].low +'C Max: '+ result[0].forecast[1].high+'C') ;
         break;
         case 1:
         case 2:
         case 3:
-          return sendGenericMessage(recipientId, result[0].location.name + ' in '+ result[0].forecast[diff+1].day,result[0].current.skytext,result[0].current.imageUrl,'Max: '+result[0].forecast[diff+1].low +'C Min: '+ result[0].forecast[diff+1].high+'C') ;
+          return sendGenericMessage(recipientId, result[0].location.name + ' in '+ result[0].forecast[diff+1].day,result[0].current.skytext,result[0].current.imageUrl,'Min: '+result[0].forecast[diff+1].low +'C Max: '+ result[0].forecast[diff+1].high+'C') ;
         break;
       }
     }
