@@ -203,13 +203,14 @@ function formatDate(date) {
 }
 // Our bot actions
 const actions = {
+var location,date;
   send({sessionId}, {text}) {
     // Our bot has something to say!
     // Let's retrieve the Facebook user whose session belongs to
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
       sendTypingOn(recipientId); 
-      //sendGenericMessage(recipientId,'Sunday','Cloudy',"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",'Max:15 Min:10');
+      sendGenericMessage(recipientId,location,'Cloudy',"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",'Max:15 Min:10');
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
@@ -231,8 +232,8 @@ const actions = {
   },
   getForecast({context, entities}) {
     return new Promise(function(resolve, reject) {
-      var location = firstEntityValue(entities, "location");
-      var date = firstEntityValue(entities, "datetime");
+      location = firstEntityValue(entities, "location");
+      date = firstEntityValue(entities, "datetime");
       if (location || date) {
         var message = 'in ';
         if(location)
@@ -250,7 +251,7 @@ const actions = {
           message+=' on '+formatDate(d);
         }
         context.forecast = message;
-        sendGenericMessage(recipientId,'Sunday','Cloudy',"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",'Max:15 Min:10');
+        
       } else {
        
         context.forecast = 'but I cant understand You, sorry - try hard)';
