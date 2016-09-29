@@ -67,7 +67,7 @@ function getWeather(city,recipientId){
       day = localeOffset(date).getDay();
     }
     let currentDay = localeOffset().getDay();
-    var diff = currentDay - day;
+    var diff =  day-currentDay;
     if(diff<4 && diff>-2){
       switch(diff){
         case -1:
