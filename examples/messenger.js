@@ -52,8 +52,17 @@ crypto.randomBytes(8, (err, buff) => {
   FB_VERIFY_TOKEN = buff.toString('hex');
   console.log(`/webhook will accept the Verify Token "${FB_VERIFY_TOKEN}"`);
 });
-
+// var day;
+//   
+//   if(date) day = new Date(date.split(' ')[0]).getDay();
+//     var currentDay = new Date().getDay();
+//     var weatherForecast = 
+//     console.log('Recieved weather forecast weather.api');
+//     if(weatherForecast){
+//       sendGenericMessage(recipientId, weatherForecast[0].location.name,weatherForecast[0].current.skytext,weatherForecast[0].current.imageUrl,weatherForecast[0].current.temperature) 
+//     }
 function getWeather(city){
+  if(!city) city = 'Kiev';
   weather.find({search: city, degreeType: 'C'}, function(err, result) {
     if(err){
       console.log(err);
@@ -61,7 +70,7 @@ function getWeather(city){
     }
 
     console.log(JSON.stringify(result, null, 2));
-    return result;
+    return sendGenericMessage(recipientId, result[0].location.name,result[0].current.skytext,result[0].current.imageUrl,result[0].current.temperature) ;
   });
 }
 
@@ -132,17 +141,9 @@ function sendTextMessage(recipientId, messageText) {
   };
 
   callSendAPI(messageData);
-  var day;
-  if(!location) location = 'Kiev';
-  if(date) day = new Date(date.split(' ')[0]).getDay();
-    var currentDay = new Date().getDay();
-    var weatherForecast = getWeather(location);
-    console.log('Recieved weather forecast weather.api');
-    //if(weatherForecast){
-      sendGenericMessage(recipientId, weatherForecast[0].location.name,weatherForecast[0].current.skytext,weatherForecast[0].current.imageUrl,weatherForecast[0].current.temperature) 
-    //}
-    
   
+  getWeather(location);
+    
 }
 
 function sendGenericMessage(recipientId, day,weather,image,temperatres) {
