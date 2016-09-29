@@ -134,7 +134,7 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
-function sendGenericMessage(recipientId, day) {
+function sendGenericMessage(recipientId, day,weather,image,temperatres) {
 
   var messageData = {
     recipient: {
@@ -147,11 +147,11 @@ function sendGenericMessage(recipientId, day) {
           template_type: "generic",
           elements: [{
             title: day,
-            subtitle:'Cloudy',
-            image_url:"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png"
+            subtitle:weather,
+            image_url:image
           }, {
             title: "Temperature",
-            subtitle: "Max: 15 Min: 10"
+            subtitle: temperatres
           }]
         }
       }
@@ -209,7 +209,7 @@ const actions = {
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
       sendTypingOn(recipientId);
-      sendGenericMessage(recipientId,'Sunday');
+      sendGenericMessage(recipientId,'Sunday','Cloudy',"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",'Max:15 Min:10');
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
