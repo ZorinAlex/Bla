@@ -80,7 +80,7 @@ function getWeather(city,recipientId){
         case 1:
         case 2:
         case 3:
-          return sendGenericMessage(recipientId, result[0].location.name + ' in '+ result[0].forecast[diff+1].day,result[0].current.skytext,result[0].current.imageUrl,'Max: '+result[0].forecast[diff+1].low +'C Min: '+ result[0].forecast[diff+1].high+'C') ;
+          return sendGenericMessage(recipientId, result[0].location.name + ' in '+ result[0].forecast[diff+2].day,result[0].current.skytext,result[0].current.imageUrl,'Max: '+result[0].forecast[diff+2].low +'C Min: '+ result[0].forecast[diff+2].high+'C') ;
         break;
       }
     }
