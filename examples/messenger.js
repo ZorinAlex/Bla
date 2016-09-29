@@ -134,7 +134,7 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
   
   if(location || date){
-    sendGenericMessage(recipientId,'Bla','blabla','http://files.softicons.com/download/web-icons/weather-icons-by-wojciech-grzanka/png/128x128/28.png','blabla')
+    sendGenericMessage(recipientId,''+location,'blabla','http://files.softicons.com/download/web-icons/weather-icons-by-wojciech-grzanka/png/128x128/28.png','blabla')
   }
 }
 
