@@ -274,8 +274,8 @@ const actions = {
           message+='your location';
         }
         if(date)
-          console.log('DATE: '+date);
         {
+          console.log('DATE: '+ date);
           let d = new Date(date);
           message+=' on '+formatDate(d);
         }else{
