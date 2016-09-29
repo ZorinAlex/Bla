@@ -275,8 +275,10 @@ const actions = {
         }
         if(date)
         {
-          console.log('DATE: '+ date);
+          
           let d = new Date(date);
+          console.log('DATE INITIAL: '+ date);
+          console.log('DATE: '+ d);
           message+=' on '+formatDate(d);
         }else{
           let d = new Date();
