@@ -69,8 +69,8 @@ function getWeather(city,recipientId){
       return null;
     }
     console.log(JSON.stringify(result, null, 2));
-    var day;
     
+    var day = new Date().getDay();
     if(date) day = new Date(date.split(' ')[0]).getDay();
     var currentDay = new Date().getDay();
     var diff = currentDay - day;
