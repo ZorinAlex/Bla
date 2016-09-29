@@ -132,6 +132,10 @@ function sendTextMessage(recipientId, messageText) {
   };
 
   callSendAPI(messageData);
+  
+  if(location || date){
+    sendGenericMessage(recipientId,'Bla','blabla','http://files.softicons.com/download/web-icons/weather-icons-by-wojciech-grzanka/png/128x128/28.png','blabla')
+  }
 }
 
 function sendGenericMessage(recipientId, day,weather,image,temperatres) {
@@ -202,15 +206,15 @@ function formatDate(date) {
   return [year, month, day].join('-')+' at ' +[hour,min].join('.');
 }
 // Our bot actions
+var location, date;
 const actions = {
-var location,date;
+
   send({sessionId}, {text}) {
     // Our bot has something to say!
     // Let's retrieve the Facebook user whose session belongs to
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
       sendTypingOn(recipientId); 
-      sendGenericMessage(recipientId,location,'Cloudy',"http://www.i2clipart.com/cliparts/f/6/2/2/clipart-cloudy-f622.png",'Max:15 Min:10');
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
