@@ -52,15 +52,7 @@ crypto.randomBytes(8, (err, buff) => {
   FB_VERIFY_TOKEN = buff.toString('hex');
   console.log(`/webhook will accept the Verify Token "${FB_VERIFY_TOKEN}"`);
 });
-// var day;
-//   
-//   if(date) day = new Date(date.split(' ')[0]).getDay();
-//     var currentDay = new Date().getDay();
-//     var weatherForecast = 
-//     console.log('Recieved weather forecast weather.api');
-//     if(weatherForecast){
-//       sendGenericMessage(recipientId, weatherForecast[0].location.name,weatherForecast[0].current.skytext,weatherForecast[0].current.imageUrl,weatherForecast[0].current.temperature) 
-//     }
+
 function getWeather(city,recipientId){
   if(!city) city = 'Kiev';
   weather.find({search: city, degreeType: 'C'}, function(err, result) {
@@ -70,12 +62,12 @@ function getWeather(city,recipientId){
     }
     console.log(JSON.stringify(result, null, 2));
     
-    let day = localeOffset();
+    let day = localeOffset().getDay();
 
     if(date){
       day = localeOffset(date).getDay();
     }
-    var currentDay = localeOffset().getDay();
+    let currentDay = localeOffset().getDay();
     var diff = currentDay - day;
     if(diff<4 && diff>-2){
       switch(diff){
