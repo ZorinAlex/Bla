@@ -133,9 +133,16 @@ function sendTextMessage(recipientId, messageText) {
 
   callSendAPI(messageData);
   
-  if(location || date){
-    sendGenericMessage(recipientId,''+location,'blabla','http://files.softicons.com/download/web-icons/weather-icons-by-wojciech-grzanka/png/128x128/28.png','blabla')
-  }
+  if(!location) location = 'Kiev';
+    var day = new Date(date.split(' ')[0]).getDay();
+    var currentDay = new Date().getDay();
+    var weatherForecast = getWeather(location);
+    console.log('Recieved weather forecast weather.api');
+    if(weatherForecast){
+      sendGenericMessage(recipientId, weatherForecast[0].location.name,weatherForecast[0].current.skytext,weatherForecast[0].current.imageUrl,weatherForecast[0].current.temperature) 
+    }
+    
+  
 }
 
 function sendGenericMessage(recipientId, day,weather,image,temperatres) {
