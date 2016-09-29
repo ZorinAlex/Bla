@@ -70,9 +70,12 @@ function getWeather(city,recipientId){
     }
     console.log(JSON.stringify(result, null, 2));
     
-    var day = new Date().getDay();
-    if(date) day = new Date(date.split(' ')[0]).getDay();
-    var currentDay = new Date().getDay();
+    let day = localeOffset();
+
+    if(date){
+      day = localeOffset(date).getDay();
+    }
+    var currentDay = localeOffset().getDay();
     var diff = currentDay - day;
     if(diff<4 && diff>-2){
       switch(diff){
@@ -215,17 +218,25 @@ const findOrCreateSession = (fbid) => {
   }
   return sessionId;
 };
-
-function formatDate(date) {
-  let d = new Date(date);
+function localeOffset(date){
+  let d;
+  if(date){
+    d = new Date(date);
+  }else{
+    d = new Date();
+  }
   let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-  let nd = new Date(utc + (3600000*3));
-  let month = '' + (nd.getMonth() + 1);
-  let day = '' + nd.getDate();
-  let year = nd.getFullYear();
+  return new Date(utc + (3600000*3));
+}
+function formatDate(date) {
+  let d = localeOffset(date);
 
-  let hour = '' + nd.getHours();
-  let min = '' + nd.getMinutes();
+  let month = '' + (d.getMonth() + 1);
+  let day = '' + d.getDate();
+  let year = d.getFullYear();
+
+  let hour = '' + d.getHours();
+  let min = '' + d.getMinutes();
 
   if (month.length < 2) month = '0' + month;
   if (day.length < 2) day = '0' + day;
