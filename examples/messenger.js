@@ -88,10 +88,7 @@ function getWeather(city,recipientId){
           return sendGenericMessage(recipientId, result[0].location.name + ' in '+ result[0].forecast[diff].day,result[0].current.skytext,result[0].current.imageUrl,'Max: '+result[0].forecast[diff].low +'C Min: '+ result[0].forecast[diff].high+'C') ;
         break;
       }
-    }else{
-      return sendTextMessage(recipientId, 'Sorry, weather for this day unvaliable');
     }
-    
  
   });
 }
