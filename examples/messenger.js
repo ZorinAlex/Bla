@@ -217,13 +217,15 @@ const findOrCreateSession = (fbid) => {
 };
 
 function formatDate(date) {
-  var d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear(),
+  let d = new Date(date);
+  let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+  let nd = new Date(utc + (3600000*3));
+  let month = '' + (nd.getMonth() + 1);
+  let day = '' + nd.getDate();
+  let year = nd.getFullYear();
 
-      hour = '' + d.getHours(),
-      min = '' + d.getMinutes();
+  let hour = '' + nd.getHours();
+  let min = '' + nd.getMinutes();
 
   if (month.length < 2) month = '0' + month;
   if (day.length < 2) day = '0' + day;
@@ -275,10 +277,8 @@ const actions = {
         }
         if(date)
         {
-          //let d = new Date(date);
-
-          //message+=' on '+formatDate(d);
-          message+=date;
+          let d = new Date(date);
+          message+=' on '+formatDate(d);
         }else{
           let d = new Date();
           message+=' on '+formatDate(d);
