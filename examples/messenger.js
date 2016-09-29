@@ -148,8 +148,8 @@ function sendGenericMessage(recipientId, day,weather,image,temperatres) {
           elements: [{
             title: day,
             subtitle:weather,
-            image_url:image
-          }, {
+            image_url:image,
+         // }, {
             title: "Temperature",
             subtitle: temperatres
           }]
