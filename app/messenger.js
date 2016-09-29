@@ -10,7 +10,7 @@
 // 1. npm install body-parser express request
 // 2. Download and install ngrok from https://ngrok.com/download
 // 3. ./ngrok http 8445
-// 4. WIT_TOKEN=your_access_token FB_APP_SECRET=your_app_secret FB_PAGE_TOKEN=your_page_token node examples/messenger.js
+// 4. WIT_TOKEN=your_access_token FB_APP_SECRET=your_app_secret FB_PAGE_TOKEN=your_page_token node app/messenger.js
 // 5. Subscribe your page to the Webhooks using verify_token and `https://<your_ngrok_io>/webhook` as callback URL.
 // 6. Talk to your bot on Messenger!
 
@@ -19,7 +19,7 @@ const crypto = require('crypto');
 const express = require('express');
 const fetch = require('node-fetch');
 const request = require('request');
-const fconfig = require('../fconfog');
+const fconfig = require('./../fconfog');
 const weather = require('weather-js');
 
 let Wit = null;
